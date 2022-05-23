@@ -1,0 +1,60 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened #drawer>
+    <mat-toolbar color="primary">
+      <span>Menu</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button (click)="drawer.close()" aria-label="menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-toolbar>
+      <mat-toolbar-row [routerLink]="['/']">
+        <span>Movies</span>
+        <span class="example-spacer"></span>
+        <mat-icon>theaters</mat-icon>
+      </mat-toolbar-row>
+      <mat-toolbar-row [routerLink]="['/favorites',this.id]">
+        <span> My Favourites</span>
+        <span class="example-spacer"></span>
+        <mat-icon>favorite</mat-icon>
+      </mat-toolbar-row>
+      <mat-toolbar-row [routerLink]="['/user-page',this.id]">
+        <span>My Profile</span>
+        <span class="example-spacer"></span>
+        <mat-icon>person</mat-icon>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <button
+      mat-mini-fab
+      mat-button
+      (click)="drawer.open()"
+      *ngIf="!drawer.opened"
+      color="primary"
+      class="menu-icon"
+      aria-label="menu icon"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="container p-4 d-flex justify-content-center">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{ user.name }}</mat-card-title>
+          <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+
+        <mat-card-content>
+          <p>Ciao sono {{user.name}}! </p>
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+    <div class="container d-flex justify-content-center">
+      <button mat-flat-button color="warn" (click)="logout()">Logout</button>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+

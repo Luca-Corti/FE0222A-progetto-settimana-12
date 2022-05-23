@@ -1,0 +1,72 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened #drawer>
+    <mat-toolbar color="primary">
+      <span>Menu</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button (click)="drawer.close()" aria-label="menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-toolbar>
+      <mat-toolbar-row [routerLink]="['/']">
+        <span>Movies</span>
+        <span class="example-spacer"></span>
+        <mat-icon>theaters</mat-icon>
+      </mat-toolbar-row>
+      <mat-toolbar-row [routerLink]="['/favorites',this.id]">
+        <span> My Favourites</span>
+        <span class="example-spacer"></span>
+        <mat-icon>favorite</mat-icon>
+      </mat-toolbar-row>
+      <mat-toolbar-row [routerLink]="['/user-page',this.id]">
+        <span>My Profile</span>
+        <span class="example-spacer"></span>
+        <mat-icon>person</mat-icon>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-drawer>
+  <mat-drawer-content >
+    <button
+      mat-mini-fab
+      mat-button
+      (click)="drawer.open()"
+      *ngIf="!drawer.opened"
+      color="primary"
+      class="menu-icon"
+      aria-label="menu icon"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="container p-4 d-flex flex-wrap gap-4 justify-content-center" *ngIf="likedMovies.length>0;else nolikes">
+      <mat-card class="example-card" *ngFor="let movie of this.likedMovies">
+        <img
+          mat-card-image
+          src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}"
+          alt="Movie poster"
+        />
+        <mat-card-header>
+          <mat-card-title>{{ movie.original_title }}</mat-card-title>
+          <mat-card-subtitle>{{ movie.title }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{movie.overview}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-drawer-content>
+  <ng-template  #nolikes>
+    <div class="container d-flex justify-content-center mt-5">
+<mat-card class="yoda-card">
+      <img
+        mat-card-image
+        src="https://pbs.twimg.com/profile_images/1308452901669548038/oUiS2mWj_400x400.jpg"
+        alt="Movie poster"
+      />
+      <mat-card-header>
+        <mat-card-title>Ups! No movies you like found i have! Save some in homepage you must! </mat-card-title>
+      </mat-card-header>
+    </mat-card>
+    </div>
+
+  </ng-template>
+</mat-drawer-container>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './authentication/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'FE0222A-progetto-settimana-12';
+  constructor(private authSrv:AuthService){
+    this.authSrv.autoLogin()
+  }
 }

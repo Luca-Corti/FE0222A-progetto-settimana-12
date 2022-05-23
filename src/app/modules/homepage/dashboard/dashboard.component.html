@@ -1,0 +1,73 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened #drawer>
+    <mat-toolbar color="primary">
+      <span>Menu</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button (click)="drawer.close()" aria-label="menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-toolbar>
+      <mat-toolbar-row [routerLink]="['/']">
+        <span>Movies</span>
+        <span class="example-spacer"></span>
+        <mat-icon>theaters</mat-icon>
+      </mat-toolbar-row>
+      <mat-toolbar-row [routerLink]="['/favorites',this.userId]">
+        <span> My Favourites</span>
+        <span class="example-spacer"></span>
+        <mat-icon>favorite</mat-icon>
+      </mat-toolbar-row>
+      <mat-toolbar-row [routerLink]="['/user-page',this.userId]">
+        <span>My Profile</span>
+        <span class="example-spacer"></span>
+        <mat-icon>person</mat-icon>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <button
+      mat-mini-fab
+      mat-button
+      (click)="drawer.open()"
+      *ngIf="!drawer.opened"
+      color="primary"
+      class="menu-icon"
+      aria-label="menu icon"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="container p-4 d-flex flex-wrap gap-4 justify-content-center">
+      <mat-card class="example-card" *ngFor="let movie of this.movies">
+        <img
+          mat-card-image
+          src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}"
+          alt="Movie poster"
+        />
+        <mat-card-header>
+          <mat-card-title>{{ movie.original_title }}</mat-card-title>
+          <mat-card-subtitle>{{ movie.title }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ movie.overview.substring(0, 100) }}</p>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button *ngIf="!showLikeButton(movie.id)"
+            mat-icon-button
+            (click)="like(movie.id); movie.isLiked=true"
+            aria-label="like icon"
+          >
+            <span class="material-icons"> favorite_border </span>
+          </button>
+          <button *ngIf="showLikeButton(movie.id)"
+            mat-icon-button
+            (click)="dislike(movie.id); movie.isLiked=false"
+            aria-label="like icon"
+          >
+            <span class="material-icons"> favorite </span>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
